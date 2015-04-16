@@ -1,0 +1,180 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	font-family: 'nta','Khula', sans-serif;
+	width: 1920px;
+	height: 1080px;
+	margin: 0;
+	padding: 0;
+}
+
+.col {
+	width: 310px;
+	display: block;
+	float: left;
+	height: 115px;
+	padding: 5px;
+}
+
+.col .estimate {
+	background-color: black;
+	border-radius: 50%;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 34px;
+	color: white;
+	font-size: 1.2rem;
+	margin-right: 12px;
+}
+
+.col .key {
+	font-weight: 600;
+  	color: #000;
+  	display: inline-block;
+}
+
+.col .taskcount {
+	color: #ffffff;
+	background-color: #333333;
+	font-size: 0.8em;
+	padding: 3px 5px;
+	border-radius: 3px;
+	margin-left: 150px;
+}
+
+.col span.task {
+border-radius: 5px 0 5px 0;
+background-color: #333333;
+padding: 4px 10px;
+}
+
+.col h2 {
+	margin: 0;
+	line-height: 1.5rem;
+	font-size: 1.2rem;
+	font-weight: 400;
+}
+
+.table-head {
+	background-color: #333333;
+	color: #ccc;
+	font-size: 1.5rem;
+	height: 130px;
+}
+
+.table-head .col {
+	line-height: 8rem;
+}
+
+.table-row {
+	color: #fff;
+	border-top: 5px solid black;
+	height: 125px;
+}
+
+.table-row .story-lane {
+	background-color: #666666;
+}
+
+.table-row .in-progress {
+	background-color: #727272;
+}
+
+.table-row .peer-review {
+	background-color: #7f7f7f;
+}
+
+.table-row .developer-done {
+	background-color: #8c8c8c;
+}
+
+.table-row .stakeholder-review {
+	background-color: #969696;
+}
+
+.table-row .done-done {
+	background-color: #a0a0a0;
+}
+
+.table-row .col.stakeholder-review .content, 
+.table-row .col.done-done .content {
+	background-color: #666666;
+	margin: -4px;
+	height: 113px;
+	padding: 5px;
+}
+
+.task {
+	background-color: #333333;
+	margin-bottom: 3px;
+	border-radius: 4px;
+}
+
+.task .task-summary {
+	font-size: 0.8rem;
+	color: #ffffff;
+	display: inline-block;
+	margin: 0;
+	line-height: 12px;
+	margin-top: 9px;
+	margin-left: 10px;
+}
+
+.task .assignee {
+	background-color: #ffffff;
+	padding: 2px 6px 0;
+	font-weight: normal;
+	border: 1px solid #000000;
+	color: #666666;
+	font-size: .8rem;
+}
+
+p.description {
+	font-size: 0.8rem;
+}
+
+.clear {
+	clear: both;
+	height: 1px;
+}
+
+.truncate {
+  width: 310px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate2 {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+[data-status="PO Review"] .story-lane span, 
+[data-status="PO Review"] .story-lane p,
+[data-status="PO Review"] .done-done .content 
+{
+	display: none;
+}
+
+[data-status="Done"] .story-lane span, [data-status="Done"] .story-lane p, 
+[data-status="Done"] .stakeholder-review .content 
+{
+	display: none;
+}
+
+[data-status="To Do"] .stakeholder-review .content,
+[data-status="To Do"] .done-done .content,
+[data-status="In Progress"] .stakeholder-review .content,
+[data-status="In Progress"] .done-done .content 
+{
+	display: none;
+}

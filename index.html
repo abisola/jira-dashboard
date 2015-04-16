@@ -1,0 +1,99 @@
+<html>
+
+<head>
+	<title>Digideps Information Radiatory</title>
+	<link href="/css/font.css" media="all" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/css/style.css">	
+	<link href='http://fonts.googleapis.com/css?family=Khula:300,600,800,400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="table-head">
+			<div class="col story-lane">Story</div>
+			<div class="col in-progress">In Progress</div>
+			<div class="col peer-review">Peer Review</div>
+			<div class="col developer-done">Developer Done</div>
+			<div class="col stakeholder-review">Stakeholder Review</div>
+			<div class="col done-done">Done Done</div>
+		</div>
+
+		<div id="target"></div>
+
+	</div>
+
+</body>
+
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/mustache.js"></script>
+
+	<script type="text/javascript" src="js/script.js"></script>
+
+
+	<script id="row-template" type="x-tmpl-mustache">
+
+	{{#stories}}
+		<div class="table-row" data-status="{{status}}">
+			<div class="col story-lane">
+				<div class="content">
+					<h2 class="summary truncate">{{summary}}</h2>
+					<span class="estimate">{{estimate}}</span>
+					<div class="key">{{key}}</div>
+					<span class="taskcount">{{subtasks.todo.length}} Tasks</span>
+					<p class="description">
+						{{description}}
+					</p>
+				</div>
+			</div>
+			<div class="col in-progress">
+				{{#subtasks.inprogress}}
+					<div class="task">
+						<p class="task-summary truncate2">{{summary}}</p>
+						<span class="assignee">{{assignee}}</span>
+					</div>
+				{{/subtasks.inprogress}}
+			</div>
+			<div class="col peer-review">
+				{{#subtasks.peerreview}}
+					<div class="task">
+						<p class="task-summary truncate2">{{summary}}</p>
+						<span class="assignee">{{assignee}}</span>
+					</div>
+				{{/subtasks.peerreview}}
+			</div>
+			<div class="col developer-done">
+				{{#subtasks.developerdone}}
+					<div class="task">
+						<p class="task-summary truncate2">{{summary}}</p>
+						<span class="assignee">{{assignee}}</span>
+					</div>
+				{{/subtasks.developerdone}}
+			</div>
+			<div class="col stakeholder-review">
+				<div class="content">
+					<h2 class="summary truncate">{{summary}}</h2>
+					<span class="estimate">{{estimate}}</span>
+					<div class="key">{{key}}</div>
+					<span class="taskcount">{{subtasks.todo.length}} Tasks</span>
+					<p class="description">
+						{{description}}
+					</p>				
+				</div>
+			</div>
+			<div class="col done-done">
+				<div class="content">
+					<h2 class="summary truncate">{{summary}}</h2>
+					<span class="estimate">{{estimate}}</span>
+					<div class="key">{{key}}</div>
+					<span class="taskcount">{{subtasks.todo.length}} Tasks</span>
+					<p class="description">
+						{{description}}
+					</p>
+				</div>
+			</div>
+		</div>
+	{{/stories}}
+	</script
+</html>
