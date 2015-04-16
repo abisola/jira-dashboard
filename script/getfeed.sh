@@ -1,0 +1,1 @@
+curl -o ../data/feed.json -D- -u $JIRA_USERNAME:$JIRA_PWD -X GET -H "Content-Type: application/json" "$JIRA_URL?jql=project+=+"$JIRA_PROJECT_NAME"+AND+Sprint+=+167+ORDER+BY+created+ASC&maxResults=120"
