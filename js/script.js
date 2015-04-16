@@ -86,27 +86,7 @@ jQuery(function(){
 		
 		renderTemplate(nicholas);
 
-
-
-		/**
-			Terrible terrible hackery to render story status AFTER page has loaded
-			this is BAD!!! Sorry everyone :)
-			TODO - fix this.
-		*/
-
-		$(".table-row").each(function(){
-			var storystatus = this.dataset.status;
-			console.log(storystatus);
-
-			if (storystatus === "PO Review") {
-				
-			}
-		});
-
-
 	});
-
-	
 
 });
 
