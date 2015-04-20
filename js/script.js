@@ -86,13 +86,29 @@ function getDataAndRender() {
 
 	  };
 	
-		var nicholas = {}; //TODO refactor
-		nicholas.stories = stories;
-		renderTemplate(nicholas);
+		var storyCont = {}; //TODO refactor
+		storyCont.stories = stories;
+
+		var finalStories = massageInprogressStories(storyCont);
+
+		console.log(storyCont);
+		renderTemplate(storyCont);
 	});
-	
-	setTimeout(getDataAndRender, 60000);
-	
+		
+}
+
+function massageInprogressStories(storyCont) {
+	for (var i = 0; i < storyCont.stories.length; i++) {
+		var _todo = storyCont.stories[i].subtasks.todo.length;
+		var _devdone = storyCont.stories[i].subtasks.developerdone.length;
+		var _inprogress = storyCont.stories[i].subtasks.inprogress.length;
+		var _review = storyCont.stories[i].subtasks.peerreview.length;
+		if ( _todo < (_devdone + _inprogress + _review) && storyCont.stories[i].status == "To Do") {
+			storyCont.stories[i].status = "In Progress";
+		}
+	};
+
+	return storyCont;
 }
 
 function renderTemplate(stories) {
@@ -125,7 +141,7 @@ JSON Data Structure
 Story id: DD-53
 Story summary: Login
 Story description: As a user, I want to login so that I can totally see things clearly
-Asignee: Dustin Nguyen
+Asignee: Jim Nguyen
 Estimate: 5
 Status: Stakeholder Review
 
