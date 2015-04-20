@@ -3,7 +3,14 @@ var data_URL = "/data/feed.json";
 
 jQuery(function(){
 	
-	//get the URL of the REST API call to JIRA
+	getDataAndRender();
+
+});
+
+
+function getDataAndRender() {
+
+//get the URL of the REST API call to JIRA
 	$.get( data_URL, function( data ) {
 	  console.log( "Data Loaded: " );
 	  var stories = [];
@@ -20,7 +27,6 @@ jQuery(function(){
 	  		story.summary = _fields.summary;
 	  		story.description = _fields.description ? _fields.description.split(/\n/)[0] : ''; //split out the carriage return
 	  		story.assigneename = _fields.assignee ? _fields.assignee.displayName : 'None';
-	  		// story.assigneeavatar = _fields.assignee.avatarUrls.48x48;
 	  		story.estimate = _fields.customfield_10004;
 	  		story.status = _fields.status.name;
 
@@ -65,7 +71,7 @@ jQuery(function(){
 							developerdone.push(subtask);
 						break;
 					}
-					// subtasks.push(subtask);
+
 					__subtasks.todo = todo;
 					__subtasks.inprogress = inprogress;
 					__subtasks.peerreview = peerreview;
@@ -82,17 +88,15 @@ jQuery(function(){
 	
 		var nicholas = {}; //TODO refactor
 		nicholas.stories = stories;
-		console.log(nicholas);  
-		
 		renderTemplate(nicholas);
-
 	});
-
-});
+	
+	setTimeout(getDataAndRender, 60000);
+	
+}
 
 function renderTemplate(stories) {
 	var template = $('#row-template').html();
-	Mustache.parse(template);   
 
 	var rendered = Mustache.render(template, stories);
 	$('#target').html(rendered);
