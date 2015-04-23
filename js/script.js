@@ -94,6 +94,8 @@ function getDataAndRender() {
 		console.log(storyCont);
 		renderTemplate(storyCont);
 	});
+
+	setTimeout(getDataAndRender, 10000); //repeat this every 10 seconds
 		
 }
 
