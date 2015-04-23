@@ -17,6 +17,7 @@ body {
 	float: left;
 	height: 115px;
 	padding: 5px;
+	overflow: hidden;
 }
 
 .col .estimate {
