@@ -95,16 +95,16 @@ function getDataAndRender() {
 		renderTemplate(storyCont);
 	});
 
-	setTimeout(getDataAndRender, 10000); //repeat this every 10 seconds
+	setTimeout(getDataAndRender, 60000); //repeat this every minute
 		
 }
 
 function massageInprogressStories(storyCont) {
 	for (var i = 0; i < storyCont.stories.length; i++) {
-		var _todo = storyCont.stories[i].subtasks.todo.length;
-		var _devdone = storyCont.stories[i].subtasks.developerdone.length;
-		var _inprogress = storyCont.stories[i].subtasks.inprogress.length;
-		var _review = storyCont.stories[i].subtasks.peerreview.length;
+		var _todo = storyCont.stories[i].subtasks.todo ? storyCont.stories[i].subtasks.todo.length : 0;
+		var _devdone = storyCont.stories[i].subtasks.developerdone ? storyCont.stories[i].subtasks.developerdone.length : 0;
+		var _inprogress = storyCont.stories[i].subtasks.inprogress ? storyCont.stories[i].subtasks.inprogress.length : 0;
+		var _review = storyCont.stories[i].subtasks.peerreview ? storyCont.stories[i].subtasks.peerreview.length : 0;
 		if ( _todo < (_devdone + _inprogress + _review) && storyCont.stories[i].status == "To Do") {
 			storyCont.stories[i].status = "In Progress";
 		}
