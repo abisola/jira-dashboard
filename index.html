@@ -14,10 +14,12 @@
 		<div class="table-head">
 			<div class="col story-lane">Story</div>
 			<div class="col in-progress">In Progress</div>
-			<div class="col peer-review">Peer Review</div>
-			<div class="col developer-done">Developer Done</div>
 			<div class="col stakeholder-review">Stakeholder Review</div>
-			<div class="col done-done">Done Done</div>
+			<div class="col peer-review">Peer Review</div>
+			<div class="col developer-done">Signoff</div>
+<!-- 			<div class="col ready">Ready</div>
+ -->	
+ 			<div class="col done-done">Released</div>
 		</div>
 
 		<div id="target"></div>
@@ -38,65 +40,26 @@
 		<div class="table-row" data-status="{{status}}">
 			<div class="col story-lane">
 				<div class="content">
-					<h2 class="summary truncate">{{summary}}</h2>
-					<span class="estimate">{{estimate}}</span>
+					<h2 class="summary">{{summary}}</h2>
 					<div class="key">{{key}}</div>
-					<span class="taskcount">{{subtasks.todo.length}} Tasks</span>
-					<div class="icon">&nbsp;</div>
-					<p class="description">
-						{{description}}
-					</p>
 				</div>
 			</div>
-			<div class="col in-progress">
-				{{#subtasks.inprogress}}
-					<div class="task">
-						<p class="task-summary truncate2">{{summary}}</p>
-						<span class="assignee">{{assignee}}</span>
-					</div>
-				{{/subtasks.inprogress}}
+			<div class="col in-progress {{statuses.inprogress}}">
+
 			</div>
-			<div class="col peer-review">
-				{{#subtasks.peerreview}}
-					<div class="task">
-						<p class="task-summary truncate2">{{summary}}</p>
-						<span class="assignee">{{assignee}}</span>
-					</div>
-				{{/subtasks.peerreview}}
+			<div class="col stakeholder-review {{statuses.stakeholderreview}}">
+
 			</div>
-			<div class="col developer-done">
-				{{#subtasks.developerdone}}
-					<div class="task">
-						<p class="task-summary truncate2">{{summary}}</p>
-						<span class="assignee">{{assignee}}</span>
-					</div>
-				{{/subtasks.developerdone}}
+			<div class="col peer-review {{statuses.peerreview}}">
+
 			</div>
-			<div class="col stakeholder-review">
-				<div class="content">
-					<h2 class="summary truncate">{{summary}}</h2>
-					<span class="estimate">{{estimate}}</span>
-					<div class="key">{{key}}</div>
-					<span class="taskcount">{{subtasks.todo.length}} Tasks</span>
-					<div class="icon">&nbsp;</div>
-					<p class="description">
-						{{description}}
-					</p>				
-				</div>
+			<div class="col developer-done {{statuses.ready}}">
+
 			</div>
-			<div class="col done-done">
-				<div class="content">
-					<h2 class="summary truncate">{{summary}}</h2>
-					<span class="estimate">{{estimate}}</span>
-					<div class="key">{{key}}</div>
-					<span class="taskcount">{{subtasks.todo.length}} Tasks</span>
-					<div class="icon">&nbsp;</div>
-					<p class="description">
-						{{description}}
-					</p>
-				</div>
+			<div class="col done-done {{statuses.released}}">
+
 			</div>
 		</div>
 	{{/stories}}
-	</script
+	</script>
 </html>

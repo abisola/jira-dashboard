@@ -57,7 +57,7 @@ padding: 4px 10px;
 .col h2 {
 	margin: 0;
 	line-height: 1.5rem;
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	font-weight: 400;
 }
 
@@ -108,6 +108,20 @@ padding: 4px 10px;
 	margin: -4px;
 	height: 113px;
 	padding: 5px;
+}
+
+.table-row .col.st-here {
+	background-image: url("/img/bg-status-here.png");
+    background-position-x: -30px;
+    background-repeat: no-repeat;
+    background-position-y: 45px;
+}
+
+.table-row .col.st-done {
+	background-image: url("/img/bg-status-done.png");
+    background-position-x: -30px;
+    background-repeat: no-repeat;
+    background-position-y: 45px;
 }
 
 .task {

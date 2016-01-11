@@ -2,7 +2,7 @@ var data_URL = "/data/feed.json";
 
 
 jQuery(function(){
-	
+
 	getDataAndRender();
 
 });
@@ -14,9 +14,9 @@ function getDataAndRender() {
 	$.get( data_URL, function( data ) {
 	  console.log( "Data Loaded: " );
 	  var stories = [];
-	
+
 	  for (var i = 0; i < data.issues.length; i++) {
-	  	var issue = data.issues[i]	  	
+	  	var issue = data.issues[i]
 	  	var _fields = issue.fields;
 
 	  	//check if issue is a story
@@ -30,73 +30,24 @@ function getDataAndRender() {
 	  		story.estimate = _fields.customfield_10004;
 	  		story.status = _fields.status.name;
 
-	  		//if story contains subtasks then add them on
-	  		if (issue.fields.subtasks) {
-	  			var _subtasks = issue.fields.subtasks;
-	  			var subtasks = [];
-	  			var __subtasks = {};
-	  			
-
-	  			var todo = [];
-	  			var inprogress = [];
-	  			var peerreview = [];
-	  			var developerdone = [];
-
-
-	  			for (var k = _subtasks.length - 1; k >= 0; k--) {
-	  				var _subtask = _subtasks[k]
-	  				var subtask = {};
-
-					subtask.summary = _subtask.fields.summary;
-					subtask.key = _subtask.key;
-					subtask.status = _subtask.fields.status.name;
-					subtask.assignee = getSubtaskAssignee(_subtask.key, data);
-
-					switch (subtask.status) {
-						case "To Do" :
-							todo.push(subtask);
-						break;
-
-						case "In Progress" : 
-							inprogress.push(subtask);
-						break;
-
-						case "Peer Review" :
-							peerreview.push(subtask);
-						break; 
-
-						case "PO Review" :
-
-						case "Developer Done":
-							developerdone.push(subtask);
-						break;
-					}
-
-					__subtasks.todo = todo;
-					__subtasks.inprogress = inprogress;
-					__subtasks.peerreview = peerreview;
-					__subtasks.developerdone = developerdone;
-	  			};
-	  			
-	  			story.subtasks = __subtasks;
-	  		}
+	  		story.statuses = getStatusItems(_fields.status.name);
 
 	  		stories.push(story);
 	  	}
 
 	  };
-	
+
 		var storyCont = {}; //TODO refactor
 		storyCont.stories = stories;
 
-		var finalStories = massageInprogressStories(storyCont);
+		//var finalStories = massageInprogressStories(storyCont);
 
 		console.log(storyCont);
 		renderTemplate(storyCont);
 	});
 
 	setTimeout(getDataAndRender, 60000); //repeat this every minute
-		
+
 }
 
 function massageInprogressStories(storyCont) {
@@ -122,7 +73,7 @@ function renderTemplate(stories) {
 
 function getSubtaskAssignee(key, data) {
 	for (var i = 0; i < data.issues.length; i++) {
-	  	var issue = data.issues[i]	  	
+	  	var issue = data.issues[i]
 	  	var _fields = issue.fields;
 	  	if (key === issue.key){
 	  		//this is the subtask. get the assignee initials
@@ -137,8 +88,41 @@ function getSubtaskAssignee(key, data) {
 	return "XX";
 }
 
+function getStatusItems(_status) {
+	var _inprogress = "In Progress";
+	var _stakeholderreview = "Stakeholder Review";
+	var _peerreview = "Peer Review";
+	var _signoff = "Ready";
+	var _released = "Released";
 
-/** 
+	var statuses = {};
+	if (_status == _released) {
+		statuses.released = "st-here";
+		statuses.ready = "st-done";
+		statuses.peerreview = "st-done";
+		statuses.stakeholderreview = "st-done"; 
+		statuses.inprogress = "st-done";
+	} else if (_status == _signoff) {
+		statuses.ready = "st-here";
+		statuses.peerreview = "st-done"; 
+		statuses.stakeholderreview = "st-done"; 
+		statuses.inprogress = "st-done";
+	} else if (_status == _peerreview) {
+		statuses.peerreview = "st-here";
+		statuses.stakeholderreview = "st-done"; 
+		statuses.inprogress = "st-done";
+	} else if (_status == _stakeholderreview) {
+		statuses.stakeholderreview = "st-here";
+		statuses.inprogress = "st-done";
+	} else if (_status == _inprogress) {
+		statuses.inprogress = "st-here";
+	}
+
+	return statuses;
+}
+
+
+/**
 JSON Data Structure
 Story id: DD-53
 Story summary: Login
@@ -151,7 +135,7 @@ Subtasks[] : {}
 
 {
 	story : DD-53
-	
+
 }
 
 */
