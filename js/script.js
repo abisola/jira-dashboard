@@ -12,7 +12,7 @@ function getDataAndRender() {
 
 //get the URL of the REST API call to JIRA
 	$.get( data_URL, function( data ) {
-	  console.log( "Data Loaded: " );
+	  console.log( "Data Loaded: ++" );
 	  var stories = [];
 
 	  for (var i = 0; i < data.issues.length; i++) {
@@ -20,10 +20,11 @@ function getDataAndRender() {
 	  	var _fields = issue.fields;
 
 	  	//check if issue is a story
-	  	if (_fields.issuetype.name === "Story") {
+	  	if (_fields.issuetype.name === "Story" || _fields.issuetype.name === "Bug" || _fields.issuetype.name === "Task") {
 	  		var story = {};
 	  		story.id = issue.id;
 	  		story.key = issue.key;
+	  		story.type = _fields.issuetype.name;
 	  		story.summary = _fields.summary;
 	  		story.description = _fields.description ? _fields.description.split(/\n/)[0] : ''; //split out the carriage return
 	  		story.assigneename = _fields.assignee ? _fields.assignee.displayName : 'None';
@@ -92,6 +93,7 @@ function getStatusItems(_status) {
 	var _inprogress = "In Progress";
 	var _stakeholderreview = "Stakeholder Review";
 	var _peerreview = "Peer Review";
+	var _poreview = "PO Review";
 	var _signoff = "Ready";
 	var _released = "Released";
 
@@ -99,11 +101,18 @@ function getStatusItems(_status) {
 	if (_status == _released) {
 		statuses.released = "st-here";
 		statuses.ready = "st-done";
+		statuses.poreview = "st-done";
 		statuses.peerreview = "st-done";
 		statuses.stakeholderreview = "st-done"; 
 		statuses.inprogress = "st-done";
 	} else if (_status == _signoff) {
 		statuses.ready = "st-here";
+		statuses.poreview = "st-done";
+		statuses.peerreview = "st-done"; 
+		statuses.stakeholderreview = "st-done"; 
+		statuses.inprogress = "st-done";
+	} else if (_status == _poreview) {
+		statuses.poreview = "st-here";
 		statuses.peerreview = "st-done"; 
 		statuses.stakeholderreview = "st-done"; 
 		statuses.inprogress = "st-done";

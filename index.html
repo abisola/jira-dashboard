@@ -17,8 +17,7 @@
 			<div class="col stakeholder-review">Stakeholder Review</div>
 			<div class="col peer-review">Peer Review</div>
 			<div class="col developer-done">Signoff</div>
-<!-- 			<div class="col ready">Ready</div>
- -->	
+ 	 		<div class="col ready">Ready</div>
  			<div class="col done-done">Released</div>
 		</div>
 
@@ -41,7 +40,7 @@
 			<div class="col story-lane">
 				<div class="content">
 					<h2 class="summary">{{summary}}</h2>
-					<div class="key">{{key}}</div>
+					<div class="key">{{key}}</div> <span class="type">[{{type}}]</span>
 				</div>
 			</div>
 			<div class="col in-progress {{statuses.inprogress}}">
@@ -51,6 +50,9 @@
 
 			</div>
 			<div class="col peer-review {{statuses.peerreview}}">
+
+			</div>
+			<div class="col developer-done {{statuses.poreview}}">
 
 			</div>
 			<div class="col developer-done {{statuses.ready}}">

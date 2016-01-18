@@ -12,12 +12,16 @@ body {
 }
 
 .col {
-	width: 310px;
+	width: 256px;
 	display: block;
 	float: left;
 	height: 115px;
 	padding: 5px;
 	overflow: hidden;
+}
+
+.col.story-lane{
+	width: 314;
 }
 
 .col .estimate {
